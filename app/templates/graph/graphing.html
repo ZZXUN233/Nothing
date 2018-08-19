@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>绘图测试</title>
+{% endblock %}
+{{ bootstrap.load_css() }}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <embed type="image/svg+xml" src="{{ graph_data | safe }}" style="max-width: 1000px"/>
+
+{% endblock %}
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock %}

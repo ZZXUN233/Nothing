@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>用户注册</title>
+{% endblock %}
+{{ bootstrap.load_css() }}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="alert-danger">
+        <h3>500，内部服务器出现错误！</h3>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+{% block script %}
+    {{ super() }}
+{% endblock %}

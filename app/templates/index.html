@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+    {{ super() }}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2>主题</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">这是一个块</h4>
+                    <p class="card-text">抱歉你来早了！现在什么都没有呢！</p>
+                    <a href="{{ url_for("web.login") }}" class="card-link">登陆</a>
+                    <a href="{{ url_for("web.register") }}" class="card-link">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="m-4"/>
+    <div class="container">
+        <p>something new !</p>
+    </div>
+
+    {#    测试代码#}
+    {#    <p>#}
+    {#        <ins>{{ date.name }}</ins>#}
+    {#        is#}
+    {#        <ins>{{ date.age }}</ins>#}
+    {#        years old!#}
+    {#    </p>#}
+    {# 消息闪现！ #}
+    {#    {% with messages = get_flashed_messages(category_filter=["zzx"]) %}#}
+    {#        <b>{{ messages }}</b>#}
+    {# 模板引擎中的注释 #}
+    {#        <ul>#}
+    {##}
+    {#            {% for foo in ["dasdg","asdghsdh"] %}#}
+    {#                <li>{{ foo }}</li>#}
+    {#            {% endfor %}#}
+    {#            {{ name |default(name)| default("None") }} {# 竖线用作值的传递 #}
+    {#        </ul>#}
+    {#        <i>{{ messages }}</i> {# 闪现消息必须在with和endwith之间才有效 #}
+    {#    {% endwith %}#}
+
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    <p>
+        <small>{{ moment(current_time).format('LLL') }}</small>
+    </p>
+    {#    <p>{{ moment(current_time).fromNow(refresh=True) }}</p>#}
+{% endblock %}
+

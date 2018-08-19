@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{#{% import "bootstrap/wtf.html" as wtf %}#}
+{% block content %}
+    <div class="jumbotron">
+        <h1>About</h1>
+        <p>Nothing more!</p>
+        <div class="container">
+            <ul>
+                <li><a href="{{ url_for('web.pygalexample') }}">绘制表格</a></li>
+                {#                <li><a href="{{ url_for('web.') }}"></a></li>#}
+            </ul>
+            <div class="col-md-4">
+{#                {{ wtf.quick_form(form) }}#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
