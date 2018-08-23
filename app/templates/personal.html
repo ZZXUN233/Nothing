@@ -4,14 +4,29 @@
     {#     <link rel="stylesheet" href="{{ url_for('static', filename='css/personal.css')}}">#}
 {% endblock %}
 {% block content %}
-    <div class="card">
-        <div class="card-title">
+    <div class="container">
+        <br>
+        <h4 style="text-align: center">
+            {{ current_user.nickname | upper }} 的个人主页
+        </h4>
 
-        </div>
+        <h5>写过的废话有：</h5>
+        {% include 'poem/_poem.html' %}
+        {#        {% for poem in poems %}#}
+        {#            <ul class="list-group list-group-flush">#}
+        {#                <li class="list-group-item">{{ poem.show_detail()['title'] }}</li>#}
+        {#            </ul>#}
+        {#            <div>#}
+        {#                {{ poem.show_detail()['body_html'] | safe }}#}
+        {#            </div>#}
+        {#        {% endfor %}#}
         <div class="card-body">
-
+            <div class="btn-group">
+                <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗歌</a>
+                <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗集</a>
+                {#                <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗歌</a>#}
+            </div>
         </div>
-
     </div>
 
 {% endblock %}

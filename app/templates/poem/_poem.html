@@ -1,0 +1,13 @@
+<div class="card">
+    <ul class="list-group list-group-flush">
+        {% for poem in poems %}
+            <li class="list-group-item">
+                <div>
+                    <a href="{{ url_for('web.poem',id=poem.id) }}">
+                        <span class="label">{{ poem.title }}</span>
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

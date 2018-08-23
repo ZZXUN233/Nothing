@@ -8,7 +8,6 @@
     {% block head %}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        {#        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">#}
         {{ bootstrap.load_css() }}
     {% endblock %}
 </head>
@@ -25,15 +24,10 @@
                  class="d-inline-block align-top" alt="">
             POEM OCEAN
         </a>
-        {#        <a class="navbar-brand" href="#">主页</a>#}
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                {#                <li class="nav-item active">#}
-                {#                    <a class="nav-link" href="#">PoemOcean <span class="sr-only">(current)</span></a>#}
-                {#                </li>#}
                 <li class="nav-item">
                     {{ render_nav_item('web.index', '首页', use_li=True) }}
-                    {#                    {{ render_nav_item('web.explore', '个人主页', use_li=True) }}#}
                     {{ render_nav_item('web.about', '关于', use_li=True) }}
                 </li>
 
@@ -41,39 +35,25 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        {#                        {{ default('个人', true) }}#}
                         个人
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% if not current_user.is_authenticated %}
-                            {#                            <a class="dropdown-item" href="{{ url_for('web.personal') }}">个人主页</a>#}
                             <a class="dropdown-item" href="{{ url_for('web.login') }}">登陆</a>
                         {% else %}
                             <a class="dropdown-item"
                                href="{{ url_for('web.personal') }}">{{ current_user.nickname }}的主页</a>
-                            <a class="dropdown-item" href="{{ url_for('web.login') }}">个人设置</a>
+                            <a class="dropdown-item" href="{{ url_for('web.user_info') }}">个人设置</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url_for('web.logout') }}">退出登录</a>
                         {% endif %}
-
-                        {#                        <a class="dropdown-item" href="{{ url_for('web.login') }}">登陆</a>#}
                     </div>
                 </li>
             </ul>
-
-
             <form class="form-inline my-2 my-lg-0" action="#">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-
-            {#            <ul class="nav navbar-nav navbar-right">#}
-            {#                {% if current_user.is_authenticated %}#}
-            {#                <li><a href="{{ url_for('web.login') }}">退出</a> </li>#}
-            {#                {% else %}#}
-            {#                <li><a href="{{ url_for('web.login') }}">登录</a></li>#}
-            {#                {% endif %}#}
-            {#            </ul>#}
         </div>
     </nav>
 
@@ -104,11 +84,19 @@
 
 {#<div class="jumbotron">#}
 <div class="container">
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(category_filter=['warning']) %}
         {% for message in messages %}
             {% if message %}
                 {#                <div class="alert-danger" style="text-align: center">{{ message }}</div>#}
                 <div class="alert alert-warning" role="alert" style="text-align: center">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=['success']) %}
+        {% for message in messages %}
+            {% if message %}
+                {#                <div class="alert-danger" style="text-align: center">{{ message }}</div>#}
+                <div class="alert alert-success" role="alert" style="text-align: center">{{ message }}</div>
             {% endif %}
         {% endfor %}
     {% endwith %}
@@ -136,6 +124,7 @@
 {% block script %}
     <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
     {{ moment.include_moment() }}
+    {{ pagedown.include_pagedown() }}
     {{ bootstrap.load_js() }}
     <script>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};

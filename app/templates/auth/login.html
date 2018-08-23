@@ -22,7 +22,7 @@
                         <div class="card fat">
                             <div class="card-body">
                                 <h4 class="card-title">登录</h4>
-                                <form method="POST">
+                                <form method="POST" action="{{ url_for('web.login') }}">
                                     <div class="form-group">
                                         <label for="email">邮箱</label>
                                         <input id="email" type="email" class="form-control" name="email"
@@ -32,7 +32,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="password">密码
-                                            <a href="{{ url_for('web.reset') }}" class="float-right">
+                                            <a href="{{ url_for('web.forget_pwd') }}" class="float-right"
+                                               target="_blank">
                                                 忘记密码了？
                                             </a>
                                         </label>

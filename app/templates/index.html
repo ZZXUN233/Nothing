@@ -8,21 +8,37 @@
     {{ super() }}
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h2>主题</h2>
+            <h2>主页</h2>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">这是一个块</h4>
-                    <p class="card-text">抱歉你来早了！现在什么都没有呢！</p>
-                    <a href="{{ url_for("web.login") }}" class="card-link">登陆</a>
-                    <a href="{{ url_for("web.register") }}" class="card-link">注册</a>
+                    {% if not current_user.is_authenticated %}
+                        <h4 class="card-title">这是一个新大陆！</h4>
+                        <p class="card-text">抱歉你来早了！现在什么都没有呢！</p>
+                        <a href="{{ url_for("web.login") }}" class="card-link">登陆</a>
+                        <a href="{{ url_for("web.register") }}" class="card-link">注册</a>
+                    {% else %}
+                        <h4 class="card-title">你好！{{ current_user.nickname | upper }}</h4>
+                        <p class="card-text">你可以选择发布内容，或是浏览所有人的内容！</p>
+                        <a href="#">发布内容</a>
+                        <a href="#">浏览内容</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
+        <hr class="m-4"/>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">今天讨论的主题是</h4>
+                    <p class="card-text">
+                        晚饭吃什么！
+                    </p>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <hr class="m-4"/>
-    <div class="container">
-        <p>something new !</p>
-    </div>
+
 
     {#    测试代码#}
     {#    <p>#}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <br/>
+            <div class="card-title">
+                <h4 style="text-align: center">{{ poems['now_poem'].title }}</h4>
+            </div>
+            <hr>
+            <div class="card-body">
+                {#            {% autoescape false %}#}
+                {{ poems['now_poem'].body_html | safe }}
+                {#            {% endautoescape %}#}
+                <div class="label small" style="text-align: right">
+                    发布时间：<span>{{ poems['now_poem'].timestamp | safe }}</span></div>
+            </div>
+            <div class="card-footer">
+                <form class="form-group">
+                    <button class="btn btn-secondary">修改内容</button>
+                    <a class="btn btn-secondary" href="{{ url_for('web.poem_del' ,id=poems['now_poem'].id) }}">删除</a>
+                    <a class="btn btn-secondary" href="{{ url_for('web.personal') }}">返回个人首页</a>
+                </form>
+            </div>
+        </div>
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+            {% if poems['pre_poem'] %}
+                <li class="page-item"><a class="page-link"
+                                         href="{{ url_for('web.poem',id=poems['pre_poem'].id) }}">前一篇</a></li>
+            {% endif %}
+            {% if poems['next_poem'] %}
+                <li class="page-item"><a class="page-link"
+                                         href="{{ url_for('web.poem',id=poems['next_poem'].id) }}">后一篇</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+{% endblock %}

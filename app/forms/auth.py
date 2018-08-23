@@ -1,5 +1,6 @@
-from wtforms import Form, StringField, PasswordField
-from wtforms.validators import DataRequired, Length, Email, ValidationError
+from flask_login import current_user
+from wtforms import Form, StringField, PasswordField, IntegerField
+from wtforms.validators import DataRequired, Length, Email, ValidationError, EqualTo
 
 from app.models.user import User
 
@@ -9,6 +10,10 @@ class RegisterForm(Form):
                                     Email(message='电子邮箱不合规范')])
     password = PasswordField(validators=[
         DataRequired(message='密码不能为空，请输入规范的密码！'), Length(6, 32)
+    ])
+    password_again = PasswordField(validators=[
+        DataRequired(message='密码不能为空，请输入规范的密码！'), Length(6, 32),
+        EqualTo('password', message="两次密码不一致！")
     ])
     nickname = StringField(validators=[
         DataRequired(), Length(2, 10, message='昵称至少需要两个字符，最多10个字符')
@@ -27,8 +32,48 @@ class RegisterForm(Form):
 
 class LoginForm(Form):
     email = StringField(validators=[
-        DataRequired(), Length(8, 64),Email(message='电子邮件不复合规范')
+        DataRequired(), Length(8, 64), Email(message='电子邮件不复合规范')
     ])
     password = PasswordField(validators=[
         DataRequired(message='密码不能为空，请输入你的密码'), Length(6, 32)
     ])
+
+
+class ChangePwdForm(Form):
+    old_password = PasswordField(validators=[
+        DataRequired(message='必须填入原密码！'), Length(6, 32)
+    ])
+    new_password1 = PasswordField(validators=[
+        DataRequired(message='请输入新密码！'), Length(6, 32)
+    ])
+    new_password2 = PasswordField(validators=[
+        DataRequired(message='请输入新密码！'), Length(6, 32),
+        EqualTo('new_password1', message='两次输入的密码不一致！')
+    ])
+
+    # def validate_old_password(self, field):
+    #     if not User.check_password(field):
+    #         raise ValidationError("原密码输入错误！")
+
+
+class EmailForm(Form):
+    email = StringField(validators=[
+        DataRequired(), Length(8, 64), Email(message='电子邮件不复合规范')
+    ])
+
+
+class InfoForm(Form):
+    new_nickname = StringField(validators=[
+        DataRequired(), Length(2, 10, message='昵称至少需要两个字符，最多10个字符')
+    ])
+
+    phone_number = IntegerField()
+
+    new_email = StringField(validators=[
+        DataRequired(), Length(8, 64), Email(message='电子邮件不复合规范')
+    ])
+
+    # def validate_new_nickname(self, field):
+    #     if current_user.nickname == field.data or \
+    #             User.query.filter_by(nickname=field.data).first():
+    #         raise ValidationError('昵称未修改或是新昵称已被注册！')

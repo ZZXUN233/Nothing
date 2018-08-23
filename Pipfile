@@ -21,6 +21,9 @@ pygal = "*"
 flask-migrate = "*"
 flask-mail = "*"
 flask-wtf = "*"
+flask-pagedown = "*"
+markdown = "*"
+bleach = "*"
 
 [dev-packages]
 

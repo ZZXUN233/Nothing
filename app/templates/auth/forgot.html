@@ -16,7 +16,7 @@
                 <div class="row justify-content-md-center align-items-center h-100">
                     <div class="card-wrapper">
                         <div class="brand">
-                            <img src="{{ url_for('static',filename="images/logo.png") }}">
+                            <img src="{{ url_for('static',filename='images/logo.jpg') }}">
                         </div>
                         <div class="card fat">
                             <div class="card-body">
@@ -29,6 +29,8 @@
                                                required autofocus>
                                         <div class="form-text text-muted">
                                             点击重置密码后，你将收到一个重置密码的链接!
+                                            你也可以继续<a class="link-normal"
+                                                     href="{{ url_for('web.index') }}"><strong>浏览首页</strong></a>
                                         </div>
                                     </div>
 

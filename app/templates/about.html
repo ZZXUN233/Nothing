@@ -5,13 +5,30 @@
         <h1>About</h1>
         <p>Nothing more!</p>
         <div class="container">
-            <ul>
-                <li><a href="{{ url_for('web.pygalexample') }}">绘制表格</a></li>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{{ url_for('web.pygalexample') }}">绘制表格</a></li>
                 {#                <li><a href="{{ url_for('web.') }}"></a></li>#}
             </ul>
-            <div class="col-md-4">
-{#                {{ wtf.quick_form(form) }}#}
+            <div class="card">
+                <h3 class="card-title" style="text-align: center">
+                    2048-swf
+                </h3>
+                <div class="card-body" style="text-align: center">
+{#                    <embed src="{{ url_for('static',filename='swf/2048.swf') }}"#}
+{#                           width="480" height="570" quality="high">#}
+{#                           type="application/x-shockwave-flash">#}
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="card-title" style="text-align: center">
+                    圈小猫-swf
+                </h3>
+                <div class="card-body" style="text-align: center">
+{#                    <embed src="{{ url_for('static',filename='swf/cat.swf') }}"#}
+{#                           width="480" height="570" quality="high">#}
+{#                           type="application/x-shockwave-flash">#}
+                </div>
+                {#                {{ wtf.quick_form(form) }}#}
             </div>
         </div>
-    </div>
 {% endblock %}
