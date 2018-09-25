@@ -13,7 +13,6 @@ cymysql = "*"
 vispy = "*"
 numpy = "*"
 "pyqt5" = "*"
-bootstrap-flask = "*"
 flask-script = "*"
 flask-login = "*"
 flask-moment = "*"
@@ -24,6 +23,7 @@ flask-wtf = "*"
 flask-pagedown = "*"
 markdown = "*"
 bleach = "*"
+bootstrap-flask = "*"
 
 [dev-packages]
 

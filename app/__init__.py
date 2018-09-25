@@ -27,8 +27,10 @@ def create_app():
     app.config.from_object("app.secure")
     register_blueprint(app)  # 加载蓝图
     # 插件管理
+    # Bootstrap(app)
     bootstrap.init_app(app)
     moment.init_app(app)
+    # bootstrap = Bootstrap(app)
     pagedown.init_app(app)
     mail.init_app(app)
 

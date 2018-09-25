@@ -23,10 +23,48 @@
         <div class="card-body">
             <div class="btn-group">
                 <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗歌</a>
-                <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗集</a>
+                {#                <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗集</a>#}
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">
+                    发布诗集
+                </button>
                 {#                <a class="btn btn-secondary" href="{{ url_for('web.poem_pub') }}">发布诗歌</a>#}
             </div>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- 模态框头部 -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">编辑诗集信息</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- 模态框主体 -->
+                        <form class="form-horizontal" role="form" action="{{ url_for('web.create_poetry') }}"
+                              method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="name">诗集名称</label>
+                                    <input class="form-control" type="text" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="info">诗集描述</label>
+                                    <textarea class="form-control" type="text" name="info" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-secondary" value="创建">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
     </div>
 
 {% endblock %}

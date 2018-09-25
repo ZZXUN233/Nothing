@@ -1,19 +1,40 @@
 {% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
 
 {% block content %}
     <br/>
     <div class="container">
-        <form action="{{ url_for('web.poem_pub') }}" method="post">
-            <div class="form-group">
-                <label for="title">Poem Title</label>
-                <input type="text" class="form-control" name="title">
-            </div>
-            <div class="form-group">
-                <label for="content">Poem Content</label>
-                <textarea class="form-control" id="content" rows="5" name="content"></textarea>
-            </div>
-            <input type="submit" class="btn btn-primary" value="发布诗歌">
-        </form>
+{#        <form action="{{ url_for('web.poem_pub') }}" method="post">#}
+{#            <div class="form-group">#}
+{#                <label for="title">主题</label>#}
+{#                <input type="text" class="form-control" name="title">#}
+{#            </div>#}
+{#            <div class="form-group">#}
+{#                <label class="mr-sm-2" for="poetry_choice">所属诗集</label>#}
+{#                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="poetry_choice" name="poetry">#}
+{#                    {% for choice in choices %}#}
+{#                        <option value="{{ choice[0] }}">{{ choice[1] }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="form-group">#}
+{#                <label for="content">详细内容</label>#}
+{#                <textarea class="form-control" id="content" rows="5" name="content"></textarea>#}
+{#            </div>#}
+{#            <input type="submit" class="btn btn-primary" value="发布诗歌">#}
+            {#                        {{ form.csrf_token }}#}
+            {#                        {{ form.hidden_tag }}#}
+            {#                        {{ form.title.label }}#}
+            {#                        {{ form.title(class='form-control') }}#}
+            {#                        {{ form.poetry.label }}#}
+            {#                        {{ form.poetry(class='custom-select') }}#}
+            {#                        {{ form.content.label }}#}
+            {#                        {{ form.content(class='form-control') }}#}
+            {#                        {{ form.submit(class='btn btn-primary') }}#}
+            {#            {{ form.csrf_token }}#}
+            {#            {{ wtf.quick_form(form) }}#}
+                        {{ render_form(form) }}
+{#        </form>#}
 
     </div>
 {% endblock %}

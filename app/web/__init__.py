@@ -11,3 +11,5 @@ from app.web import poem
 from app.web import personal
 from app.web import main
 from app.web import graph
+from app.web import author
+from app.web import poetry

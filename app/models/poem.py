@@ -18,12 +18,12 @@ __author__ = "ZZXUN"
 class Poem(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(50), nullable=False)
-    # author = Column(String(30), default='佚名')
-    # publish_time = Column(DateTime())
+    author = Column(String(30), default='佚名')
+    publish_time = Column(DateTime())
     # author = relationship('Author')
     # aid = Column(Integer, ForeignKey('author.id'), nullable=True)
-    # poetry = relationship('Poetry')
-    # pid = Column(Integer, ForeignKey('poetry.id'), nullable=True)
+    poetry = relationship('Poetry')
+    pid = Column(Integer, ForeignKey('poetry.id'), nullable=True)
     user = relationship('User')
     uid = Column(Integer, ForeignKey('user.id'), nullable=False)
 

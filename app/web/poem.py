@@ -1,6 +1,7 @@
 from flask_login import current_user, login_required
 
 from app.forms.poem_post import PoemForm
+from app.models.poetry import Poetry
 from app.models.poem import Poem
 from app.models.base import db
 from . import web
@@ -18,20 +19,22 @@ def explore():
 
 
 @web.route('/poem_pub', methods=["POST", "GET"])
+@login_required
 def poem_pub():
-    poem_form = PoemForm(request.form)
-    if request.method == 'POST' and poem_form.validate():
+    choices = Poetry.get_poetry_by_user(current_user)
+    form = PoemForm(choices)
+    if request.method == 'POST' and form.validate():
         poem = Poem()
-        poem.set_attrs(poem_form.data)
+        poem.set_attrs(form.data)
+        poem.poetry = choices[form.poetry.data]
         poem.user = current_user
-        with db.session.no_autoflush:
+        with db.auto_commit():
             db.session.add(poem)
-            db.session.commit()
             poem.update_send_counter()
         flash('发布成功', category='success')
         return redirect(url_for('web.personal'))
-        # return render_template('poem_pub.html', form=poem_form)
-    return render_template('poem/poem_pub.html', form=poem_form)
+        # return render_template('poem_pub.html', form=form)
+    return render_template('poem/poem_pub.html', form=form, choices=choices)
 
 
 # 自己看的诗歌界面，怎么添加下一页和上一页的访问

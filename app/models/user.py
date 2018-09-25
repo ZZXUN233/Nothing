@@ -1,11 +1,13 @@
-from flask import flash
+from flask import flash, current_app
+# from itsdangerous import Serializer
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_login import UserMixin
 from app import login_manger
 
-from app.models.base import Base
+from app.models.base import Base, db
 
 
 # 保存密码为密文
@@ -59,7 +61,27 @@ class User(Base, UserMixin):
         }
         return info
 
+    def generate_token(self, expiration=600):  # 600s后令牌失效
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'id': self.id}).decode('utf-8')
 
+    @staticmethod
+    def reset_password(token, new_password):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token.encode('utf-8'))
+        except:
+            # print('1重置密码失败！')
+            return False
+        user = User.query.get(data.get('id'))
+        if user is None:
+            # print('2重置密码失败！')
+            return False
+        with db.auto_commit():
+            user.password = new_password
+            db.session.add(user)
+        # db.session.commit()
+        return True
 
 
 # # 服务于login_in

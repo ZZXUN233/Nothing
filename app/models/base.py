@@ -15,6 +15,7 @@ class SQLAlchemy(_SQLAlchemy):
         try:
             yield
             self.session.commit()
+            print('事务自动提交成功！')
         except Exception as e:
             self.session.rollback()
             current_app.logger.exception('%r' % e)
@@ -34,7 +35,7 @@ db = SQLAlchemy(query_class=Query)
 
 
 # 其它的数据库对应类继承于Base
-# 用于记录软删除，方便用户找回记录
+# 用于记录软删除，方便用户找8回记录
 
 class Base(db.Model):
     # _abstract_ = True
@@ -45,8 +46,23 @@ class Base(db.Model):
     def __init__(self):
         self.create_time = int(datetime.now().timestamp())
 
+    @property
+    def create_datetime(self):
+        if self.create_time:
+            return datetime.fromtimestamp(self.create_time)
+        else:
+            return None
+
     # 共同的赋值方法
     def set_attrs(self, attrs_dict):
         for key, value in attrs_dict.items():
             if hasattr(self, key) and key != 'id':  # 如果字典中有该属性
                 setattr(self, key, value)  # 动态赋值
+
+    def delete(self):
+        self.status = 0
+
+
+class BaseNoCreateTime(db.Model):
+    __abstract__ = True
+    status = Column(SmallInteger, default=1)

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
 {% block head %}
     {{ super() }}
 {% endblock %}
@@ -23,7 +24,7 @@
             <div class="card-title">
                 信息修改
             </div>
-            <form class="card-body" action="{{ url_for('web.change_info') }}" method="post">
+            <form method="post">
                 <div class="form-group">
                     <label for="exampleInputName2">新昵称</label>
                     <input type="text" class="form-control" name="new_nickname"
@@ -41,6 +42,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">提交修改</button>
                 <a href="{{ url_for('web.change_pwd') }}">修改密码</a>
+                {#                {{ render_form(form) }}#}
             </form>
         </div>
     </div>

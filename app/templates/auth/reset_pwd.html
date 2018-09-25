@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>密码重置</title>
+{% endblock %}
+{{ bootstrap.load_css() }}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/my-login.css') }}">
+{% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block content %}
+    <div class="my-login-page">
+        <section class="h-100">
+            <div class="container h-100">
+                <div class="row justify-content-md-center align-items-center h-100">
+                    <div class="card-wrapper">
+                        <div class="brand">
+                            {#						<img src="img/logo.jpg">#}
+                            <img src="{{ url_for('static',filename='images/logo.jpg') }}">
+                        </div>
+                        <div class="card fat">
+                            <div class="card-body">
+                                <h4 class="card-title">重置密码</h4>
+                                <form method="POST" action="">
+                                    <div class="form-group">
+                                        <label for="new-password">新密码</label>
+                                        <input id="new-password1" type="password" class="form-control"
+                                               name="new_password"
+                                               required autofocus data-eye>
+                                        <label for="new-password">再次输入新密码</label>
+                                        <input id="new-password2" type="password" class="form-control"
+                                               name="new_password2"
+                                               required autofocus data-eye>
+                                        <div class="form-text text-muted">
+                                            确认你能你住你的密码，同时不容易被别人猜到你的密码！
+                                            {#                                            或者你可以<a href="{{ url_for("web.user_info") }}">放弃修改！</a>#}
+                                        </div>
+                                    </div>
+                                    <div class="form-group no-margin">
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            修改密码
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+{% block script %}
+    {{ super() }}
+    <script src="{{ url_for('static',filename='js/my-login.js') }}"></script>
+{% endblock %}
